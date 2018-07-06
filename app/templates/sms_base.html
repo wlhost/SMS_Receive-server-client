@@ -1,0 +1,89 @@
+{% extends "bootstrap/base.html" %}
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    {% block head %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="description" content="{% block description %}{% endblock%}">
+    <meta name="keywords" content="{% block keywords %}{% endblock %}">
+    <title>{% block title %}{% endblock %} - 在线短信接收</title>
+    <link href="{{ url_for('static',filename='favicon.ico') }}" rel="shortcut icon" type="image/x-icon">
+    <link href="{{ url_for('static',filename='favicon.ico') }}" rel="icon" type="image/x-icon">
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet"/>
+    <link href="{{ url_for('static',filename='css/style.css') }}" rel="stylesheet">
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-3001094598236152",
+        enable_page_level_ads: true
+      });
+    </script>
+    {% block styles %}
+        {{ super() }}
+    {% endblock %}
+    {% endblock %}
+</head>
+<body>
+    {% block body %}
+        <header class="container-fluid">
+        {% block navbar %}
+        <nav class="navbar page-header navbar-static-top" role="navigation">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="https://www.pdflibr.com">
+                        <span class="logo_text">在线短信接收</span>
+                    </a>
+                    <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#linkNavbar" aria-controls="linkNavbar" aria-expanded="false">
+                        <span class="sr-only">Toggle navgation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="container-fluid navbar-collapse collapse" aria-expanded="false" id="linkNavbar">
+                    <ul class="nav navbar-nav navbar-right container-fluid">
+                        <li><a href="https://pdf-lib.org">黄兵个人博客</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">更多 <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="https://pdf-lib.org/Tools/MediaQueries">屏幕宽度查询</a></li>
+                                <li><a href="https://pdf-lib.org/Tools/ZhihuDaily">知乎日报</a></li>
+                                <li><a href="https://pdf-lib.org/Tools/IP">IP地址查询</a></li>
+                                <li><a href="https://pdf-lib.org/Tools/IntelliJIDEALicenseServer">JetBrains激活服务器</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a a href="https://www.pdflibr.com">在线接收短信</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        {% endblock %}
+        </header>
+        <article>
+        {% block content %}
+            <div class="container">
+            {{ super() }}
+            </div>
+        {% endblock %}
+        </article>
+        <footer>
+            <nav class="navbar navbar-default copyright">
+              <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                            <span>Copyright © {% block Year %}{% endblock %}
+                                <a href="https://pdf-lib.org/">黄兵个人博客</a>
+                            </span> |
+                            <span>网站备案号：鄂ICP备16022780号-2</span>
+                        </div>
+                </div>
+              </div>
+            </nav>
+        </footer>
+        {% block scripts %}
+        {{ super() }}
+        {% endblock %}
+        {{ moment.include_moment() }}
+    {% endblock %}
+</body>
+</html>

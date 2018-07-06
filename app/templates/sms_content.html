@@ -1,0 +1,112 @@
+{% extends "sms_base.html" %}
+{% import "_macros.html" as macros %}
+
+{% block description %}{{ "%s" % description }}{% endblock%}
+{% block keywords %}{{ "%s" % keywords }}{% endblock %}
+
+{% block title %}短信列表{% endblock %}
+
+{% block content %}
+    <section class="container sms-content-ad">
+        <div class="ad">
+            <picture>
+                <source media="(min-width:768px)" srcset="https://sms-1253677444.file.myqcloud.com/photo-1439798060585-62ab242d7724_1170_200.jpg">
+                <source media="(max-width:768px)" srcset="https://sms-1253677444.file.myqcloud.com/eDLHCtzRR0yfFtU0BQar_sylwiabartyzel_themap_375_70.jpg">
+                <img class="img-responsive" src="https://sms-1253677444.file.myqcloud.com/photo-1439798060585-62ab242d7724.jpg" align="在线短信接收"/>
+            </picture>
+        </div>
+    </section>
+
+    <section class="container-fluid sms_content">
+        <div class="container sms-content-list">
+            <div class="sms-content-text">
+                <h2>最新短信内容</h2>
+            </div>
+            <div class="sms-content-table table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th width="3%"> #</th>
+                        <th width="12%"> 电话号码</th>
+                        <th width="70%"> 短信内容</th>
+                        <th width="15%"> 发送日期</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in list_four %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            {% if item.PhoneNumber|length <9 %}
+                                <td>{{ item.PhoneNumber }}</td>
+                            {% else %}
+                                <td> {{ item.PhoneNumber[:item.PhoneNumber|length - 8]  + '****' + item.PhoneNumber[item.PhoneNumber|length - 4:] }} </td>
+                            {% endif %}
+                            <td> {{ item.Content }} </td>
+                            <td>
+                                <time>{{ item.SMS_ReceiveTime }}</time>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+    <section class="container sms-content-ad">
+        <div class="ad">
+            <picture>
+                <source media="(min-width:768px)" srcset="https://sms-1253677444.coscd.myqcloud.com/photo-1439798060585-62ab242d7724_1170_200.jpg">
+                <source media="(max-width:768px)" srcset="https://sms-1253677444.file.myqcloud.com/eDLHCtzRR0yfFtU0BQar_sylwiabartyzel_themap_375_70.jpg">
+                <img src="https://sms-1253677444.file.myqcloud.com/photo-1439798060585-62ab242d7724.jpg" align="在线短信接收"/>
+            </picture>
+        </div>
+    </section>
+    <section class="container-fluid sms_content">
+        <div class="container sms-content-list">
+            <div class="sms-content-text">
+                <h2>以往短信内容</h2>
+            </div>
+            <div class="sms-content-table table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th width="3%"> #</th>
+                            <th width="12%"> 电话号码</th>
+                            <th width="70%"> 短信内容</th>
+                            <th width="15%"> 发送日期</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in list_surplus %}
+                        <tr>
+                            <td> {{ loop.index }}</td>
+                            {% if item.PhoneNumber|length <9 %}
+                                <td>{{ item.PhoneNumber }}</td>
+                            {% else %}
+                                <td> {{ item.PhoneNumber[:item.PhoneNumber|length - 8]  + '****' + item.PhoneNumber[item.PhoneNumber|length - 4:] }} </td>
+                            {% endif %}
+                            <td> {{ item.Content }} </td>
+                            <td>
+                                <time>{{ item.SMS_ReceiveTime }}</time>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="sms-content-pager">
+            {% if list_surplus %}
+            <div class="pagination">
+                {{ macros.pagination_widget(pagination,'.SMSContent') }}
+            </div>
+            {% endif %}
+        </div>
+    </section>
+
+{% endblock %}
+
+{% block styles %}
+    <link href="{{ url_for('static',filename='css/sms_receive.css') }}" rel="stylesheet">
+{% endblock %}
