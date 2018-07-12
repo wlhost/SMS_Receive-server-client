@@ -1,11 +1,65 @@
 {% extends "sms_base.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
 
-{% block title %}Flask - Post{% endblock %}
+{% block title %}发布文章{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static',filename='css/editormd/editormd.css') }}"/>
+{% endblock %}
 
 {% block content %}
     <div class="container">
-    {{ wtf.quick_form(form) }}
+        <div class="row">
+            <h1 class="text-center">发布文章</h1>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                <ul class=flashes>
+                {% for category, message in messages %}
+                  <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+                </ul>
+              {% endif %}
+            {% endwith %}
+            <form method="post" action="/article/post">
+                {{ form.hidden_tag() }}
+                <div class="form-group">
+                    {{ form.title.label }}
+                    {{ form.title(class_='form-control') }}
+                </div>
+
+                <div class="form-group">
+                    {{ form.body.label }}
+                    <div id="editormd" class="form-control">
+                        {{ form.body(style="display:none;") }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    {{ form.SEO_link.label }}
+                    {{ form.SEO_link(class='form-control') }}
+                </div>
+
+                <input class="btn btn-primary" type="submit" value="Edit">
+            </form>
+        </div>
     </div>
     {% include '_posts.html' %}
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+{{ pagedown.include_pagedown() }}
+<script src="{{ url_for('static',filename='js/editormd/editormd.min.js') }}"></script>
+<script type="text/javascript">
+    var testEditor;
+
+    $(function () {
+        testEditor = editormd("editormd", {
+            width: "100%",
+            height: 640,
+            syncScrolling: "single",
+            path: "{{ url_for('static',filename='js/editormd/lib/') }}"
+        });
+    });
+</script>
 {% endblock %}

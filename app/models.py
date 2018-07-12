@@ -1,6 +1,7 @@
 from . import db
 import bleach
 from markdown import markdown
+from datetime import datetime
 
 
 # 短信接收相关表
@@ -20,18 +21,20 @@ class Article(db.Model):
     title = db.Column(db.String(128))
     body = db.Column(db.Text)
     body_html = db.Column(db.Text)
-    create_time = db.Column(db.DateTime, index=True)
-    real_filename = db.Column(db.String(128))
+    create_time = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     seo_link = db.Column(db.String(128))
 
     @staticmethod
     def on_changed_body(target, value, oldvalue, initiator):
         allowed_tags = ['a', 'abbr', 'acronym', 'b', 'blockquote', 'code',
                         'em', 'i', 'li', 'ol', 'pre', 'strong', 'ul',
-                        'h1', 'h2', 'h3', 'p']
+                        'h1', 'h2', 'h3', 'p', 'img', 'video', 'div', 'iframe', 'p', 'br', 'span', 'hr', 'src', 'class']
+        allowed_attrs = {'*': ['class'],
+                         'a': ['href', 'rel'],
+                         'img': ['src', 'alt']}
         target.body_html = bleach.linkify(bleach.clean(
             markdown(value, output_format='html'),
-            tags=allowed_tags, strip=True))
+            tags=allowed_tags, strip=True, attributes=allowed_attrs))
 
 
 db.event.listen(Article.body, 'set', Article.on_changed_body)

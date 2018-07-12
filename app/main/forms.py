@@ -6,5 +6,7 @@ from wtforms import StringField, TextAreaField, BooleanField, SelectField, \
 
 
 class PostForm(FlaskForm):
-    body = TextAreaField("What's on your mind?", validators=[DataRequired()])
+    title = StringField('Title', validators=[DataRequired()])
+    body = TextAreaField("Article Content", validators=[DataRequired()])
+    SEO_link = StringField('SEO Link')
     submit = SubmitField('Submit')

@@ -2,12 +2,12 @@
 
 import time
 from app import db
-from app.models import SMS_Receive
+from app.models import SMS_Receive, Article
 import sqlalchemy
 import sqlalchemy.orm
 import sqlalchemy.ext.declarative
 import datetime
-from flask import render_template, request, current_app, redirect, url_for
+from flask import render_template, request, current_app, redirect, url_for, flash
 from . import main
 from .forms import PostForm
 
@@ -33,8 +33,12 @@ def index():
         time_info = '%d分钟' % (minute)
     else:
         time_info = '%d秒' % (ms)
+    # 显示文章
+    article_list = Article.query.order_by(Article.create_time).all()
+
     return render_template("index.html", name=title, keywords=keyword, description=description,
-                           SMS_Count=msg_count, timeInfo=time_info, current_time=start_time)
+                           SMS_Count=msg_count, timeInfo=time_info, current_time=start_time,
+                           article_list=article_list)
 
 
 @main.route('/SMSContent')
@@ -74,9 +78,11 @@ def SMSServer():
         return '0'
 
 
-@main.route('/article/<num>', methods=['GET'])
-def article(num):
-    return
+@main.route('/article/<string:seo_link>', methods=['GET'])
+def article(seo_link):
+    post = Article.query.filter_by(seo_link=seo_link).first_or_404()
+    title = post.title
+    return render_template('article.html', posts=[post], title=title)
 
 
 @main.route('/article/edit/<num>', methods=['GET', 'POST'])
@@ -88,5 +94,11 @@ def edit(num):
 def post():
     form = PostForm()
     if form.validate_on_submit():
-        return redirect(url_for('index'))
+        post_article = Article(body=form.body.data, title=form.title.data, seo_link=form.SEO_link.data)
+        try:
+            db.session.add(post_article)
+            db.session.commit()
+            return redirect(url_for('.index'))
+        except:
+            flash(u'更新文章未成功，请重试！', 'error')
     return render_template('post.html', form=form)

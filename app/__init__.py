@@ -5,13 +5,13 @@ from flask_sqlalchemy import SQLAlchemy
 from config import config
 from flask_moment import Moment
 from flask_pagedown import PageDown
+from flaskext.markdown import Markdown
 
 bootstrap = Bootstrap()
 db = SQLAlchemy()
 moment = Moment()
 # pagedown markdown to html
 pagedown=PageDown()
-
 
 def create_app(config_name):
     app = Flask(__name__)
@@ -22,6 +22,7 @@ def create_app(config_name):
     db.init_app(app)
     moment.init_app(app)
     pagedown.init_app(app)
+    Markdown(app)
 
     # 附加路由和自定义的错误页面
     from .main import main as main_blueprint

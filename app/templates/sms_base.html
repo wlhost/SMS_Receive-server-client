@@ -80,10 +80,11 @@
               </div>
             </nav>
         </footer>
+
         {% block scripts %}
         {{ super() }}
         {% endblock %}
         {{ moment.include_moment() }}
-    {% endblock %}
+        {% endblock %}
 </body>
 </html>

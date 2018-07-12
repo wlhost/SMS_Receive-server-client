@@ -1,0 +1,17 @@
+{% extends "sms_base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block styles %}
+        {{ super() }}
+    <link href="{{ url_for('static',filename='css/article.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {% for item in posts %}
+            {{ item.body_html|safe }}
+        {% endfor %}
+    </div>
+{% endblock %}
