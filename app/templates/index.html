@@ -5,57 +5,55 @@
 {% block keywords %}{{ "%s" % keywords }}{% endblock %}
 
 {% block content %}
-    <section class="container">
-        <div class="sms_info">
-            <div class="container">
-                <div class="sms_info_graphics sms_info_list">
-                    <i><?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
-                        "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-                        <svg t="1522905909725" class="icon" style="" viewBox="0 0 1024 1024" version="1.1"
-                             xmlns="http://www.w3.org/2000/svg" p-id="1389" xmlns:xlink="http://www.w3.org/1999/xlink"
-                             width="48" height="48">
-                            <defs>
-                                <style type="text/css"></style>
-                            </defs>
-                            <path d="M869.1 692L579.7 205.4c-32.1-54-110.3-54-142.5 0L147.9 692c-32.9 55.2 7 125.2 71.2 125.2h578.8c64.2 0 104.1-70 71.2-125.2z m-359.5 52.2c-22.6 0-41-18.5-41-41 0-22.6 18.5-41 41-41 22.6 0 41 18.5 41 41 0.1 22.6-18.4 41-41 41z m41.1-186.9c0 22.6-18.5 41-41 41-22.6 0-41-18.5-41-41V347.5c0-22.6 18.5-41 41-41 22.6 0 41 18.5 41 41v209.8z"
-                                  fill="#1296db" p-id="1390"></path>
-                        </svg>
-                    </i>
-                    <h2>使用须知</h2>
-                </div>
-                <div class="sms_info_list row show-grid">
-                    <nav class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
-                        <ul>
-                            <li>在使用前你应该知晓下面的电话号码短信内容所有人都可以查看</li>
-                            <li>请不要用这个电话号码接收重要内容</li>
-                            <li>下面的电话号码只用于注册一些网站，<b class="text-info">防止被骚扰</b></li>
-                            <li>他人可以通过此电话号码找回密码，所以注册时应注意个人信息</li>
-                            <li><b class="text-danger">由此造成经济损失概不负责</b></li>
-                            <li>在使用时即代表以上条款已同意</li>
-                        </ul>
-                    </nav>
-                    <nav class="col-xs12 col-sm-12 col-md-12 col-lg-6">
-                        {% for item in article_list %}
-                            <li>
-                                <a href="{{ url_for('.article',seo_link=item.seo_link,_external=True) }}">{{ item.title }}</a>
-                            </li>
-                        {% endfor %}
-                    </nav>
-                </div>
+    <div class="sms_info">
+        <div class="container">
+            <div class="sms_info_graphics sms_info_list">
+                <i><?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+                    "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+                    <svg t="1522905909725" class="icon" style="" viewBox="0 0 1024 1024" version="1.1"
+                         xmlns="http://www.w3.org/2000/svg" p-id="1389" xmlns:xlink="http://www.w3.org/1999/xlink"
+                         width="48" height="48">
+                        <defs>
+                            <style type="text/css"></style>
+                        </defs>
+                        <path d="M869.1 692L579.7 205.4c-32.1-54-110.3-54-142.5 0L147.9 692c-32.9 55.2 7 125.2 71.2 125.2h578.8c64.2 0 104.1-70 71.2-125.2z m-359.5 52.2c-22.6 0-41-18.5-41-41 0-22.6 18.5-41 41-41 22.6 0 41 18.5 41 41 0.1 22.6-18.4 41-41 41z m41.1-186.9c0 22.6-18.5 41-41 41-22.6 0-41-18.5-41-41V347.5c0-22.6 18.5-41 41-41 22.6 0 41 18.5 41 41v209.8z"
+                              fill="#1296db" p-id="1390"></path>
+                    </svg>
+                </i>
+                <h2>使用须知</h2>
             </div>
-            <div class="sms_info_ad container">
+            <div class="sms_info_list row show-grid">
+                <nav class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                    <ul>
+                        <li>在使用前你应该知晓下面的电话号码短信内容所有人都可以查看</li>
+                        <li>请不要用这个电话号码接收重要内容</li>
+                        <li>下面的电话号码只用于注册一些网站，<b class="text-info">防止被骚扰</b></li>
+                        <li>他人可以通过此电话号码找回密码，所以注册时应注意个人信息</li>
+                        <li><b class="text-danger">由此造成经济损失概不负责</b></li>
+                        <li>在使用时即代表以上条款已同意</li>
+                    </ul>
+                </nav>
+                <nav class="col-xs12 col-sm-12 col-md-12 col-lg-6">
+                    {% for item in article_list %}
+                        <li>
+                            <a href="{{ url_for('.article',seo_link=item.seo_link,_external=True) }}">{{ item.title }}</a>
+                        </li>
+                    {% endfor %}
+                </nav>
             </div>
         </div>
-    </section>
+        <div class="sms_info_ad container">
+        </div>
+    </div>
     <section class="container-fluid sms_content">
         <div class="container">
-            <div class="sms-number-list-ad">
-                {#<picture>
-                    <source media="(min-width:768px)" srcset="https://sms-1253677444.file.myqcloud.com/14666683170_ceda251942_b.jpg">
-                    <source media="(max-width:768px)" srcset="https://sms-1253677444.file.myqcloud.com/eDLHCtzRR0yfFtU0BQar_sylwiabartyzel_themap_375_70.jpg">
-                    <img class="img-responsive" src="https://sms-1253677444.file.myqcloud.com/photo-1439798060585-62ab242d7724.jpg" align="在线短信接收"/>
-                </picture>#}
-            </div>
+            {#<div class="sms-number-list-ad sms-number-list">
+                <picture>
+                    <source media="(min-width:768px)" srcset="https://static.pdflibr.com/error_info/error_2.png">
+                    <source media="(max-width:768px)" srcset="https://static.pdflibr.com/error_info/error_3.png">
+                    <img class="img-responsive" src="https://static.pdflibr.com/error_info/error_2.png" align="在线短信接收"/>
+                </picture>
+            </div>#}
             <div class="sms-number-list row show-grid">
                 <div class="number-list-flag col-xs-12 col-sm-12 col-md-4 col-lg-4 margin-3">
                     <picture>
@@ -65,7 +63,7 @@
                                 srcset="{{ url_for('static',filename='images/china-max-768.svg') }}">
                         <img src="{{ url_for('static',filename='images/china-min-768.svg') }}">
                     </picture>
-                    <h3>+8617062503214</h3>
+                    <h3>+8617767832292</h3>
                 </div>
                 <div class="number-list-info col-xs-12 col-sm-12 col-md-4 col-lg-4 margin-3">
                     <p>总共<b>{{ SMS_Count }}</b>条短信内容。</p>

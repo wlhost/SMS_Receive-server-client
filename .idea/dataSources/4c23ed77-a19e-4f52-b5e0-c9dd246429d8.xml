@@ -915,6 +915,7 @@
     </table>
     <table id="230" parent="3" name="article">
       <Engine>InnoDB</Engine>
+      <Collation>utf8_general_ci</Collation>
     </table>
     <column id="231" parent="228" name="id">
       <Position>1</Position>
@@ -974,24 +975,25 @@
       <DataType>varchar(128)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="242" parent="230" name="content">
+    <column id="242" parent="230" name="create_time">
       <Position>3</Position>
-      <DataType>text|0s</DataType>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="243" parent="230" name="create_time">
-      <Position>4</Position>
       <DataType>datetime|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="244" parent="230" name="real_filename">
-      <Position>5</Position>
+    <column id="243" parent="230" name="seo_link">
+      <Position>4</Position>
       <DataType>varchar(128)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
+      <Collation>latin1_swedish_ci</Collation>
     </column>
-    <column id="245" parent="230" name="seo_link">
+    <column id="244" parent="230" name="body">
+      <Position>5</Position>
+      <DataType>text|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="245" parent="230" name="body_html">
       <Position>6</Position>
-      <DataType>varchar(128)|0s</DataType>
+      <DataType>text|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
     <index id="246" parent="230" name="ix_article_create_time">
