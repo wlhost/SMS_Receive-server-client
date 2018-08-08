@@ -12,6 +12,15 @@ class SMS_Receive(db.Model):
     Content = db.Column(db.String(512))
     SMS_ReceiveTime = db.Column(db.DateTime, index=True)
     Type = db.Column(db.String(32))
+    # 是否显示，如果电话号码在黑名单不显示，否则显示
+    IsShow = db.Column(db.Boolean, default=True)
+
+
+# 电话黑名单
+class blacklist(db.Model):
+    __tablename__ = 'blacklist'
+    id = db.Column(db.Integer, primary_key=True, index=True)
+    PhoneNumber = db.Column(db.String(32))
 
 
 # 文章相关表

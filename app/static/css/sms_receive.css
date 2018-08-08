@@ -173,9 +173,6 @@ footer .navbar.navbar-default.copyright{
     .sms-content-ad{
         height: 70px;
     }
-    .sms-content-ad,.container{
-        padding-right: 0;
-    }
     .sms_info_ad.container{
         padding-right: 15px;
         padding-left: 15px;
