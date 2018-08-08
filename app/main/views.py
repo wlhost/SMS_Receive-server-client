@@ -7,9 +7,16 @@ import sqlalchemy
 import sqlalchemy.orm
 import sqlalchemy.ext.declarative
 import datetime
-from flask import render_template, request, current_app, redirect, url_for, flash
+from flask import render_template, request, current_app, redirect, url_for, flash, Flask, request, send_from_directory
 from . import main
 from .forms import PostForm
+
+
+@main.route('/robots.txt')
+@main.route('/sitemap.xml')
+@main.route('/favicon.ico')
+def static_from_root():
+    return send_from_directory(current_app.static_folder, request.path[1:])
 
 
 @main.route('/')
@@ -51,8 +58,8 @@ def SMSContent():
     # 如果没有数据，默认显示第一页
     page = request.args.get('page', 1, type=int)
     # 选最剩余短信内容
-    pagination = SMS_Receive.query.order_by(SMS_Receive.SMS_ReceiveTime.desc())\
-        .filter_by(IsShow=True).paginate(page,per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],error_out=False)
+    pagination = SMS_Receive.query.order_by(SMS_Receive.SMS_ReceiveTime.desc()) \
+        .filter_by(IsShow=True).paginate(page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'], error_out=False)
     surplus = pagination.items
     return render_template("sms_content.html", name=title, keywords=keyword, description=description,
                            list_four=font_list_four, list_surplus=surplus, pagination=pagination)

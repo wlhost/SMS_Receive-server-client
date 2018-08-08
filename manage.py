@@ -20,7 +20,6 @@ def test():
 
 def make_shell_context():
     return dict(app=app, db=db)
-    # return dict(app=app, db=db, Article=Article, blacklist=blacklist, SMS_Receive=SMS_Receive)
 
 
 manager.add_command("shell", Shell(make_context=make_shell_context))
